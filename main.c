@@ -2,7 +2,7 @@
 #include<string.h>
 #include "mp3.h"
 
-TAGS tarr[6]={{"TIT2","TITLE"},{"TPE1","ARTIST"},{"TALB","ALBUM"},{"TYER","YEAR"},{"TCON","GENRE"},{"COMM","COMMENt"}};
+TAGS tarr[6]={{"TIT2","TITLE","-t"},{"TPE1","ARTIST","-a"},{"TALB","ALBUM","-A"},{"TYER","YEAR","-y"},{"TCON","GENRE","-g"},{"COMM","COMMENt","-c"}};
 
 int main(int argc,char *argv[])
 {
@@ -25,6 +25,7 @@ int main(int argc,char *argv[])
     {
         if(validate_input2(argc,argv)!=e_success)
         return 1;   
+        edit_contents(tarr,argv);
     }
     
 }

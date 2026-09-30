@@ -18,6 +18,7 @@ typedef struct
 {
     char tags[5];
     char tag_name[10];
+    char inp[3];
 }TAGS;
 
 void print_error(char *argv[]);
@@ -25,4 +26,5 @@ OperationType check_operation_type(char *str);
 Status validate_input(int argc,char *argv[]);
 Status view_contents(TAGS *tarr);
 Status validate_input2(int argc,char *argv[]);
+Status edit_contents(TAGS *tarr,char *argv[]);
 #endif
