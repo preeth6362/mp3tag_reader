@@ -16,7 +16,7 @@ void print_error(char *argv[])
 }
 Status validate_input(int argc,char *argv[])
 {
-    if(argc>3)
+    if(argc!=3)
     {
         print_error(argv);
         return e_failure;
@@ -41,7 +41,7 @@ Status view_contents(TAGS *tarr)
 {
     fseek(fptr_v,10,SEEK_SET);
     printf("--------------------------------------Displaying contents of File-----------------------------------\n\n");
-    printf("------------------------Name--------------------------------------Content----------------------------\n");
+    printf("------------------------Name-------------------------Content----------------------------------------\n");
     int i=0;
     while(i<6)
     {
@@ -51,7 +51,6 @@ Status view_contents(TAGS *tarr)
     unsigned int size;
     fread(&size,4,1,fptr_v);
     size=(size>>24)|(size>>8 & (0x0000FF00))|(size<<8 &(0x00FF0000))|(size<<24);
-    printf("size=%u\n",size);
     fseek(fptr_v,3,SEEK_CUR);
     char buff1[size];
     fread(buff1,size-1,1,fptr_v);
@@ -67,7 +66,7 @@ Status view_contents(TAGS *tarr)
         }
     }
     }
-    printf("-------------------contents displayed successfully--------------------------------\n");
+    printf("\n-------------------contents displayed successfully--------------------------------\n");
     fclose(fptr_v);
     return e_success;
 }

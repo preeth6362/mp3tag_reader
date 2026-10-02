@@ -5,7 +5,7 @@
 FILE *fptr_e;
 Status validate_input2(int argc,char *argv[])
 {
-    if(argc>5 || argc<5)
+    if(argc!=5)
     {
         print_error(argv);
         return e_failure;
@@ -48,7 +48,11 @@ Status edit_contents(TAGS *tarr,char *argv[])
     for(i=0;i<6;i++)
     {
         if(strcmp(tarr[i].inp,argv[2])==0 && strcmp(tarr[i].tags,buff1)==0)
+        {
+            printf("----------------SELECTED %s TO CHANGE------------------\n",tarr[i].tag_name);
+            printf("%s : %s\n",tarr[i].tag_name,argv[3]);
         break;
+        }
     }
     unsigned int osize;
     fread(&osize,4,1,fptr_e);
@@ -82,5 +86,16 @@ Status edit_contents(TAGS *tarr,char *argv[])
    }
    fclose(fptr_e);
    fclose(temp);
+   if(remove(argv[4])!=0)
+   {
+    printf("error deleting the file\n");
+    return e_failure;
+   }
+   if(rename("tempo.mp3",argv[4])!=0)
+   {
+    printf("error renaming the file\n");
+    return e_failure;
+   }
+   printf("editing completed\n");
    return e_success;
 }
